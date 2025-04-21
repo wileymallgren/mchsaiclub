@@ -31,18 +31,3 @@ setInterval (function(){
    }
 }, 3000)
 
-//comment this out (or not lol):
-const clublogo = document.getElementById('logo');
-clublogo.addEventListener('click', function () {
-    logoClicks++;
-    const img = document.createElement('img');
-    img.src = 'reversehog.png';
-    img.alt = 'AI Club Image';
-    img.style.width = '300px';
-    img.style.marginTop = '20px';
-    if (logoClicks > 3) {
-        for (let i = 0; i<window.innerWidth/300-1; i++) {
-            document.body.appendChild(img.cloneNode());
-        }
-    }
-});
