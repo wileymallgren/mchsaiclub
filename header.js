@@ -15,7 +15,7 @@ window.onload = function () {
     }
 
     // Define an array of colors for the animation
-    const colors = ['#007bff','#FFFFFF']
+    const colors = ['#89b4fa','#cdd6f4']
 
     let colorIndex = 0;
     let letterIndex = 0;
