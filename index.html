@@ -52,7 +52,7 @@
 <div style="height: 30px;"></div> 
 
 
-<section id="team" style="padding: 2rem; text-align: center; background: #1f1f2a;">
+<section id="team" style="padding: 2rem; text-align: center;">
   <div style="max-width: 800px; margin: 0 auto; background: #313244; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #cdd6f4;">Meet the Team</h2>
     <div class="team-cards" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
@@ -263,7 +263,7 @@
       transform: translateY(var(--final-offset));
     }
 
-    /* per-image final offsets and staggered entrance delays */
+    /* per-image final offsets and staggered entrance delays (desktop) */
     .gallery-row .flip-card-wrapper:nth-child(1) { --final-offset: 0px;  transition-delay: 0.18s; }
     .gallery-row .flip-card-wrapper:nth-child(2) { --final-offset: 36px; transition-delay: 0.42s; }
     .gallery-row .flip-card-wrapper:nth-child(3) { --final-offset: 18px;  transition-delay: 0.68s; }
@@ -331,6 +331,7 @@
       -webkit-transform: rotateY(180deg);
       will-change: transform, opacity;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      cursor: pointer; /* indicate it's clickable */
     }
 
     /* slight improvement: subtle 3D depth while hovering */
@@ -376,6 +377,29 @@
     /* keep gallery-row padding and ensure vertical overflow remains visible */
     .gallery-row { padding-bottom: 2.4rem; }
 
+    /* ---------------- Mobile / narrow layout: show all cards (no side-to-side scroll) ---------------- */
+    @media (max-width: 900px) {
+      .gallery-row {
+        flex-wrap: wrap !important;       /* allow multiple rows */
+        overflow-x: visible !important;   /* no horizontal scrolling */
+        height: auto !important;          /* let the gallery expand vertically */
+        justify-content: center;
+        gap: 18px;
+      }
+      .flip-card-wrapper {
+        margin-bottom: 18px;
+        /* simplify stagger on mobile so all appear promptly */
+        transition-delay: 0s !important;
+        --final-offset: 12px;
+      }
+      /* remove large stagger-specific offsets for stacked layout */
+      .gallery-row .flip-card-wrapper:nth-child(1),
+      .gallery-row .flip-card-wrapper:nth-child(2),
+      .gallery-row .flip-card-wrapper:nth-child(3),
+      .gallery-row .flip-card-wrapper:nth-child(4) {
+        transition-delay: 0s;
+      }
+    }
   </style>
 
   <script>
@@ -410,10 +434,11 @@
         });
       }
 
-      // Only attach touch-focused tap-to-flip if device doesn't support hover (mobile/tablet)
+      // Detect touch-only devices
       const isTouchOnly = (window.matchMedia && window.matchMedia('(hover: none)').matches) || ('ontouchstart' in window);
+
       if (isTouchOnly) {
-        // For each wrapper: detect tap vs swipe using movement threshold
+        // Mobile: each card toggles independently on tap (no unflipping of other cards).
         wrappers.forEach(wrapper => {
           let startX = 0, startY = 0, startT = 0, moved = false;
 
@@ -443,34 +468,37 @@
               wrapper.classList.toggle('flipped', nowFlipped);
               setAriaPressed(wrapper, nowFlipped);
 
-              // if you want only one card flipped at a time, unflip others:
-              if (nowFlipped) unflipAll(wrapper);
-
-              // prevent simulated mouse events causing problems
-              ev.preventDefault();
+              // do NOT unflip other cards on mobile — each card is independent.
+              ev.preventDefault(); // prevent simulated mouse events
             }
             startX = startY = 0;
           }, { passive: false });
         });
 
-        // Tapping outside should close flipped card(s)
-        document.addEventListener('touchstart', (ev) => {
-          const target = ev.target;
-          // if tap is inside a wrapper, ignore here (individual handlers run first)
-          if (wrappers.some(w => w.contains(target))) return;
-          unflipAll();
-        }, { passive: true });
+        // do NOT close flipped cards when tapping outside on mobile (user requested independent control)
       } else {
-        // Pointer devices: add keyboard toggle (Enter/Space) for accessibility and click-to-toggle fallback
+        // Pointer devices: keep hover flip, but also allow click/keyboard toggles.
         wrappers.forEach(wrapper => {
           wrapper.addEventListener('click', (ev) => {
-            // If using pointer devices, clicking should toggle as a convenience (but hover still works)
             const inner = wrapper.querySelector('.flip-card-inner');
             if (!inner) return;
             const nowFlipped = inner.classList.toggle('flipped');
             wrapper.classList.toggle('flipped', nowFlipped);
             setAriaPressed(wrapper, nowFlipped);
-            if (nowFlipped) unflipAll(wrapper);
+
+            // Optionally keep pointer behavior to only allow one open at a time:
+            // If you prefer independent clicks on desktop remove the next block.
+            if (nowFlipped) {
+              // unflip others (keep desktop tidy)
+              wrappers.forEach(w => {
+                if (w === wrapper) return;
+                const i = w.querySelector('.flip-card-inner');
+                if (!i) return;
+                i.classList.remove('flipped');
+                w.classList.remove('flipped');
+                setAriaPressed(w, false);
+              });
+            }
           });
 
           wrapper.addEventListener('keydown', (ev) => {
@@ -481,11 +509,27 @@
               const nowFlipped = inner.classList.toggle('flipped');
               wrapper.classList.toggle('flipped', nowFlipped);
               setAriaPressed(wrapper, nowFlipped);
-              if (nowFlipped) unflipAll(wrapper);
+
+              if (nowFlipped) {
+                wrappers.forEach(w => {
+                  if (w === wrapper) return;
+                  const i = w.querySelector('.flip-card-inner');
+                  if (!i) return;
+                  i.classList.remove('flipped');
+                  w.classList.remove('flipped');
+                  setAriaPressed(w, false);
+                });
+              }
             }
-            // Escape to close
             if (ev.key === 'Escape') {
-              unflipAll();
+              // close all on escape
+              wrappers.forEach(w => {
+                const i = w.querySelector('.flip-card-inner');
+                if (!i) return;
+                i.classList.remove('flipped');
+                w.classList.remove('flipped');
+                setAriaPressed(w, false);
+              });
             }
           });
         });
@@ -494,13 +538,80 @@
         document.addEventListener('click', (ev) => {
           const target = ev.target;
           if (wrappers.some(w => w.contains(target))) return;
-          unflipAll();
+          wrappers.forEach(w => {
+            const inner = w.querySelector('.flip-card-inner');
+            if (!inner) return;
+            inner.classList.remove('flipped');
+            w.classList.remove('flipped');
+            setAriaPressed(w, false);
+          });
         });
       }
+
+      // ---- Make the back face clickable/tappable to explicitly flip the card back ----
+      // This handler works for both pointer and touch devices. It stops propagation so wrapper handlers don't toggle twice.
+      const backs = Array.from(document.querySelectorAll('.flip-card-back'));
+      backs.forEach(back => {
+        // pointer/click handler
+        back.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wrapper = back.closest('.flip-card-wrapper');
+          if (!wrapper) return;
+          const inner = wrapper.querySelector('.flip-card-inner');
+          if (!inner) return;
+          // If it's flipped, unflip it. If not flipped, flip it (toggle behavior).
+          const nowFlipped = inner.classList.contains('flipped');
+          if (nowFlipped) {
+            inner.classList.remove('flipped');
+            wrapper.classList.remove('flipped');
+            setAriaPressed(wrapper, false);
+          } else {
+            inner.classList.add('flipped');
+            wrapper.classList.add('flipped');
+            setAriaPressed(wrapper, true);
+            // If on pointer devices we keep the "one open at a time" rule, unflip others:
+            if (!isTouchOnly) {
+              wrappers.forEach(w => {
+                if (w === wrapper) return;
+                const i = w.querySelector('.flip-card-inner');
+                if (!i) return;
+                i.classList.remove('flipped');
+                w.classList.remove('flipped');
+                setAriaPressed(w, false);
+              });
+            }
+          }
+        });
+
+        // touch handler (stop propagation so wrapper doesn't also toggle)
+        back.addEventListener('touchend', (e) => {
+          e.stopPropagation();
+          // For touch, respect the same toggle behavior
+          const wrapper = back.closest('.flip-card-wrapper');
+          if (!wrapper) return;
+          const inner = wrapper.querySelector('.flip-card-inner');
+          if (!inner) return;
+          const nowFlipped = inner.classList.contains('flipped');
+          if (nowFlipped) {
+            inner.classList.remove('flipped');
+            wrapper.classList.remove('flipped');
+            setAriaPressed(wrapper, false);
+          } else {
+            inner.classList.add('flipped');
+            wrapper.classList.add('flipped');
+            setAriaPressed(wrapper, true);
+            // on touch we do NOT unflip others (mobile independent behavior)
+          }
+          // Prevent simulated mouse events from firing after touch
+          e.preventDefault();
+        }, { passive: false });
+      });
     })();
   </script>
 
 </section>
+1
+
 
 
 
@@ -604,7 +715,7 @@
 </section>
 
 
-    <section id="join">
+    <section id="join" style=""">
         <h2>Join Us</h2>
         <p>If you're interested in learning more about AI, we encourage you to join our club! We welcome students of all levels of experience, from beginners to experts. You can find more information about joining on our Instagram</p>
     </section>
@@ -635,7 +746,7 @@
     Website created by Wiley Mallgren
 </div>
 
-    <script src="script.js"></script>
+
 </body>
 
 </html>
