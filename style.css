@@ -27,9 +27,10 @@ body {
     width: 100%;
     background: linear-gradient(
         135deg,
-        #1e1e2e 0%,
+        #2e2a42 0%,
+        #1e1e2e 15%,
         #1e1e2e 60%,   /* keep dark color longer */
-        #2e2a42 90%,   /* mid-tone appears gradually */
+        #2e2a42 80%,   /* mid-tone appears gradually */
         #2e2742 100%   /* bright accent at the very end */
     );
     color: #1e1e2e;
