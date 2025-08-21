@@ -181,35 +181,39 @@
     position: relative;
   ">
     <!-- Flip card 1 -->
-    <div class="flip-card-wrapper">
+    <div class="flip-card-wrapper" tabindex="0" role="button" aria-pressed="false" data-caption="Next Meeting: 11-29">
       <div class="flip-card-inner">
         <img src="imgs/Meeting 11-8! Next meeting (11-29) we start gradient descent!.jpg" alt="Image 1" class="card-front">
         <div class="flip-card-back">Considering AI possibilities!</div>
       </div>
+      <div class="tap-hint" aria-hidden="true">tap to flip</div>
     </div>
 
     <!-- Flip card 2 -->
-    <div class="flip-card-wrapper">
+    <div class="flip-card-wrapper" tabindex="0" role="button" aria-pressed="false" data-caption="Next Meeting: 11-8 (D2)">
       <div class="flip-card-inner">
         <img src="imgs/Second Meeting! Next meeting will be 11-8 in D2. (1).jpg" alt="Image 2" class="card-front">
         <div class="flip-card-back">Having some fun!</div>
       </div>
+      <div class="tap-hint" aria-hidden="true">tap to flip</div>
     </div>
 
     <!-- Flip card 3 -->
-    <div class="flip-card-wrapper">
+    <div class="flip-card-wrapper" tabindex="0" role="button" aria-pressed="false" data-caption="First Meeting Recap">
       <div class="flip-card-inner">
         <img src="imgs/FIRST MEETING WAS A SUCCESS! NEXT MEETING IS ON FRIDAY OCTOBER 18! SEE YALL THEN!.jpg" alt="Image 3" class="card-front">
-        <div class="flip-card-back">First Meeting!</div>
+        <div class="flip-card-back">First meeting!</div>
       </div>
+      <div class="tap-hint" aria-hidden="true">tap to flip</div>
     </div>
 
     <!-- Flip card 4 -->
-    <div class="flip-card-wrapper">
+    <div class="flip-card-wrapper" tabindex="0" role="button" aria-pressed="false" data-caption="Special Guest: Guransh">
       <div class="flip-card-inner">
         <img src="imgs/guransh1.jpg" alt="Image 4" class="card-front">
         <div class="flip-card-back">Guransh teaching members!</div>
       </div>
+      <div class="tap-hint" aria-hidden="true">tap to flip</div>
     </div>
   </div>
 
@@ -243,11 +247,13 @@
       border-radius: var(--card-radius);
       -webkit-tap-highlight-color: transparent;
       position: relative;
+      touch-action: auto; /* allow scrolling and swiping; tap detection uses movement threshold */
     }
 
     /* make hovered / active wrapper stack above neighbors when flipping */
     .flip-card-wrapper:hover,
-    .flip-card-wrapper.flipped {
+    .flip-card-wrapper.flipped,
+    .flip-card-wrapper:focus-within {
       z-index: 5;
     }
 
@@ -260,8 +266,8 @@
     /* per-image final offsets and staggered entrance delays */
     .gallery-row .flip-card-wrapper:nth-child(1) { --final-offset: 0px;  transition-delay: 0.18s; }
     .gallery-row .flip-card-wrapper:nth-child(2) { --final-offset: 36px; transition-delay: 0.42s; }
-    .gallery-row .flip-card-wrapper:nth-child(3) { --final-offset: 18px; transition-delay: 0.68s; }
-    .gallery-row .flip-card-wrapper:nth-child(4) { --final-offset: 48px; transition-delay: 0.92s; }
+    .gallery-row .flip-card-wrapper:nth-child(3) { --final-offset: 18px;  transition-delay: 0.68s; }
+    .gallery-row .flip-card-wrapper:nth-child(4) { --final-offset: 48px;  transition-delay: 0.92s; }
 
     /* ---------- The flipping inner card ---------- */
     .flip-card-inner {
@@ -269,7 +275,9 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;     /* keep front and back in 3D */
+      -webkit-transform-style: preserve-3d;
       transition: transform 0.8s cubic-bezier(.2,.9,.3,1);
+      -webkit-transition: -webkit-transform 0.8s cubic-bezier(.2,.9,.3,1);
       border-radius: var(--card-radius);
       will-change: transform;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -278,11 +286,13 @@
     /* flip on hover for pointer devices */
     .flip-card-wrapper:hover .flip-card-inner {
       transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
     }
 
     /* also allow a .flipped class (used for touch devices) */
     .flip-card-inner.flipped {
       transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
     }
 
     /* ---------- front (image) ---------- */
@@ -318,6 +328,7 @@
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transform: rotateY(180deg);   /* start flipped so it shows on rotation */
+      -webkit-transform: rotateY(180deg);
       will-change: transform, opacity;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }
@@ -327,17 +338,39 @@
     .flip-card-inner.flipped {
       box-shadow: 0 12px 30px rgba(0,0,0,0.25);
       transform-origin: center;
+      -webkit-transform-origin: center;
     }
 
     /* optional: improve perceived 3D by nudging the back when hovered */
     .flip-card-wrapper:hover .flip-card-back,
     .flip-card-inner.flipped .flip-card-back {
       transform: rotateY(180deg) translateZ(0.1px);
+      -webkit-transform: rotateY(180deg) translateZ(0.1px);
     }
 
     /* small accessibility: focus also flips (keyboard) */
     .flip-card-wrapper:focus-within .flip-card-inner {
       transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    /* tap hint (only visible on touch devices) */
+    .tap-hint {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+    @media (hover: none) {
+      .tap-hint { opacity: 1; transform: translateY(0); }
     }
 
     /* keep gallery-row padding and ensure vertical overflow remains visible */
@@ -346,11 +379,11 @@
   </style>
 
   <script>
-    // Entrance animation: IntersectionObserver on the wrappers
     (function () {
-      const wrappers = document.querySelectorAll('.flip-card-wrapper');
+      const wrappers = Array.from(document.querySelectorAll('.flip-card-wrapper'));
       if (!wrappers.length) return;
 
+      // Entrance animation: IntersectionObserver on the wrappers
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -359,28 +392,116 @@
           }
         });
       }, { threshold: 0.18 });
-
       wrappers.forEach(w => observer.observe(w));
 
-      // Touch-device support: toggle .flipped on tap so users without hover can flip
-      // Only attach the tap-to-flip behavior on devices that don't support hover.
-      if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+      // Utilities
+      function setAriaPressed(wrapper, pressed) {
+        wrapper.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      }
+      function unflipAll(exceptWrapper) {
+        wrappers.forEach(w => {
+          const inner = w.querySelector('.flip-card-inner');
+          if (!inner) return;
+          if (w !== exceptWrapper) {
+            inner.classList.remove('flipped');
+            w.classList.remove('flipped');
+            setAriaPressed(w, false);
+          }
+        });
+      }
+
+      // Only attach touch-focused tap-to-flip if device doesn't support hover (mobile/tablet)
+      const isTouchOnly = (window.matchMedia && window.matchMedia('(hover: none)').matches) || ('ontouchstart' in window);
+      if (isTouchOnly) {
+        // For each wrapper: detect tap vs swipe using movement threshold
+        wrappers.forEach(wrapper => {
+          let startX = 0, startY = 0, startT = 0, moved = false;
+
+          wrapper.addEventListener('touchstart', (ev) => {
+            const t = ev.touches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            startT = Date.now();
+            moved = false;
+          }, { passive: true });
+
+          wrapper.addEventListener('touchmove', (ev) => {
+            if (!startX) return;
+            const t = ev.touches[0];
+            const dx = Math.abs(t.clientX - startX);
+            const dy = Math.abs(t.clientY - startY);
+            if (dx > 10 || dy > 10) moved = true;
+          }, { passive: true });
+
+          wrapper.addEventListener('touchend', (ev) => {
+            const elapsed = Date.now() - startT;
+            // treat as a tap only if minimal movement and relatively quick
+            if (!moved && elapsed < 500) {
+              const inner = wrapper.querySelector('.flip-card-inner');
+              if (!inner) return;
+              const nowFlipped = inner.classList.toggle('flipped');
+              wrapper.classList.toggle('flipped', nowFlipped);
+              setAriaPressed(wrapper, nowFlipped);
+
+              // if you want only one card flipped at a time, unflip others:
+              if (nowFlipped) unflipAll(wrapper);
+
+              // prevent simulated mouse events causing problems
+              ev.preventDefault();
+            }
+            startX = startY = 0;
+          }, { passive: false });
+        });
+
+        // Tapping outside should close flipped card(s)
+        document.addEventListener('touchstart', (ev) => {
+          const target = ev.target;
+          // if tap is inside a wrapper, ignore here (individual handlers run first)
+          if (wrappers.some(w => w.contains(target))) return;
+          unflipAll();
+        }, { passive: true });
+      } else {
+        // Pointer devices: add keyboard toggle (Enter/Space) for accessibility and click-to-toggle fallback
         wrappers.forEach(wrapper => {
           wrapper.addEventListener('click', (ev) => {
-            // If user clicked a link or something else, ignore (no links here, safe).
+            // If using pointer devices, clicking should toggle as a convenience (but hover still works)
             const inner = wrapper.querySelector('.flip-card-inner');
             if (!inner) return;
-            inner.classList.toggle('flipped');
-
-            // Optionally prevent the click from causing horizontal scroll bounce:
-            ev.preventDefault();
+            const nowFlipped = inner.classList.toggle('flipped');
+            wrapper.classList.toggle('flipped', nowFlipped);
+            setAriaPressed(wrapper, nowFlipped);
+            if (nowFlipped) unflipAll(wrapper);
           });
+
+          wrapper.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              const inner = wrapper.querySelector('.flip-card-inner');
+              if (!inner) return;
+              const nowFlipped = inner.classList.toggle('flipped');
+              wrapper.classList.toggle('flipped', nowFlipped);
+              setAriaPressed(wrapper, nowFlipped);
+              if (nowFlipped) unflipAll(wrapper);
+            }
+            // Escape to close
+            if (ev.key === 'Escape') {
+              unflipAll();
+            }
+          });
+        });
+
+        // Close on outside click for pointer devices
+        document.addEventListener('click', (ev) => {
+          const target = ev.target;
+          if (wrappers.some(w => w.contains(target))) return;
+          unflipAll();
         });
       }
     })();
   </script>
 
 </section>
+
 
 
 
