@@ -40,5 +40,10 @@ window.onload = function () {
         }
     }
 
-    setInterval(changeColors, 150);
+    if (text === 'Object Detection') {
+        setInterval(changeColors, 100);
+    } else {
+        setInterval(changeColors, 150);
+    }
+    
 };

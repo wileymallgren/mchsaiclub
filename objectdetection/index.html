@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCHS AI Club</title>
+    <link rel="icon" href="imgs\logo-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" href="../style.css?v=2.01">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div id="logo-container" style="text-align: center; margin-bottom: 0px;">
+            <img src="../imgs/logo-removebg-preview.png" alt="Logo" id="logo">
+        </div>
+        <div id="header-content">
+            <h1 id="clubName" style="color: #89b4fa">Object Detection</h1>
+        </div>
+    </header>
+
+
+
+
+
+<div id="back" style="position:sticky;top:0;z-index:9999;disp1lay:flex;justify-content:flex-start;">
+  <button onclick="if(history.length>1){history.back()}else{location.href='../index.html'}" 
+    style="margin:8px;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:0px solid rgba(137,180,250,0.35);border-radius:999px;background:#313244;color:#cdd6f4;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,0.25);cursor:pointer;font:600 14px/1.1 system-ui, -apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+      <path d="M15 18l-6-6 6-6"></path>
+      <path d="M21 12H9"></path>
+    </svg>
+    Back
+  </button>
+</div>
+
+
+
+
+
+    <section>
+    <div style="max-width: 800px; margin: 0 auto; background: #313244; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #89b4fa;">What is it?</h2>
+        <p style="color: #cdd6f4; padding-bottom: 1rem;">
+            Using a YOLOv8 model, we built a custom PyTorch model from publicly availible datasets to detect objects in real time.
+        </p>
+        <p style="color: #cdd6f4; padding-bottom: 1rem;">
+            YOLO (You Only Look Once) was the obvious choice since it is very fast and able to run in real time on non-specialized hardware.
+        </p>
+        <p style="color: #cdd6f4; padding-bottom: 1rem;">
+            The project, lead by Wiley Mallgren, took about 3 months to complete, and is still being improved. We are currently working on applying to 
+            detection of different types of trash based on their recyclability! We always aspire to make the world a better place.
+        </p>
+    </div>
+    </section>
+
+
+<section id="showcase-photos" aria-labelledby="showcase-title" style="padding:2rem 1.25rem; color: #cdd6f4;; margin-bottom: 3rem; position: relative; z-index: 1;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="max-width: 1000px; margin: 0 auto;  margin-bottom: 3rem; background: #313244; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <h2 id="showcase-title" style="font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial; font-weight:700; font-size:clamp(1.25rem,2.2vw,1.9rem); margin-bottom: 2rem; color:#89b4fa;">
+        North Bay Science and Discovery Day
+      </h2>
+      <p style="margin:0 0 1.25rem; color: #cdd6f4;">
+        The North Bay Science and Discovery Day is an annual event that brings together science enthusiasts, researchers, educators, and the general public to celebrate and explore various scientific fields. 
+      </p>
+      <p style="margin:0 0 1.25rem; color: #cdd6f4;"></p>
+        At our booth, we demonstrated our object detection model in action, showcasing its capabilities and potential applications.
+        We also encouraged attendees to question the output of the model. When it made mistakes, we used it as a learning opportunity to explain why we should not blidlyly trust AI.
+      </p>
+    </div>
+
+    <div class="photo-grid" role="list" style="display:grid; grid-template-columns:repeat(2,1fr); gap:26px;">
+      <!-- Landscape 4:3 -->
+      <figure class="photo-card" data-aspect="landscape" role="listitem" tabindex="0">
+        <div class="card-wrap">
+          <img class="photo" src="imgs/guransh.jpg" alt="Guransh" loading="lazy">
+          <div class="rim" aria-hidden="true"></div>
+          <div class="glass">
+            <div class="label">Guransh at our booth</div>
+            <div class="sub">North Bay Science and Discover Day</div>
+          </div>
+          <div class="grain" aria-hidden="true"></div>
+        </div>
+      </figure>
+
+      <!-- Portrait 3:4 -->
+      <figure class="photo-card" data-aspect="portrait" role="listitem" tabindex="0">
+        <div class="card-wrap">
+          <img class="photo" src="imgs/ai.jpg" alt="Project" loading="lazy">
+          <div class="rim" aria-hidden="true"></div>
+          <div class="glass">
+            <div class="label">The model in Action</div>
+            <div class="sub">North Bay Science and Discover Day</div>
+          </div>
+          <div class="grain" aria-hidden="true"></div>
+        </div>
+      </figure>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MARKUP -->
+  <div id="photo-lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lb-title" tabindex="-1">
+    <button class="lb-close" aria-label="Close (Esc)">&times;</button>
+    <button class="lb-prev" aria-label="Previous (Left)">&lsaquo;</button>
+    <div class="lb-stage" role="document">
+      <img class="lb-img" src="" alt="">
+      <div class="lb-caption">
+        <div id="lb-title" class="lb-title"></div>
+        <div class="lb-sub"></div>
+      </div>
+    </div>
+    <button class="lb-next" aria-label="Next (Right)">&rsaquo;</button>
+  </div>
+
+  <style>
+    :root{
+      --accent: #89b4fa;
+      --card-radius: 14px;
+      --bg: #0b0b10;
+      --muted: rgba(255,255,255,0.04);
+      --shadow: 0 22px 50px rgba(2,6,23,0.7);
+      --card-h: clamp(260px, 32vh, 420px);
+    }
+
+    .photo-grid { margin-top: 8px; }
+    @media (max-width:900px){ .photo-grid { grid-template-columns: 1fr; gap:18px; } }
+
+    .photo-card { margin:0; outline:none; cursor: pointer; }
+    .card-wrap {
+      position:relative;
+      border-radius:var(--card-radius);
+      overflow:visible;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      transition: transform 420ms cubic-bezier(.2,.9,.3,1), box-shadow 320ms ease;
+      opacity:0;
+      transform: translateY(22px) scale(0.985);
+      animation: enterTogether 900ms cubic-bezier(.2,.9,.3,1) both;
+      height: var(--card-h);
+      width: 100%;
+    }
+
+    .photo {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; display:block; border-radius:var(--card-radius);
+      -webkit-user-drag:none; user-select:none;
+      transform:translateZ(0);
+      transition: transform 420ms cubic-bezier(.2,.9,.3,1), filter 420ms ease;
+      z-index:1;
+      filter: saturate(1.02) contrast(1.02);
+    }
+
+    .rim { position:absolute; inset:-6px; z-index:0; border-radius:calc(var(--card-radius) + 6px); background: conic-gradient(from 110deg at 50% 50%, rgba(137,180,250,0.16), rgba(137,180,250,0.06) 40%, rgba(120,90,200,0.05) 70%, transparent 100%); filter: blur(16px) saturate(1.05); mix-blend-mode:screen; opacity:0.95; pointer-events:none; transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; }
+
+    .glass { position:absolute; left:12px; right:12px; bottom:12px; z-index:4; border-radius:10px; padding:10px 12px; display:flex; flex-direction:column; gap:3px; backdrop-filter: blur(6px) saturate(1.05); background: linear-gradient(180deg, rgba(11,12,16,0.16), rgba(9,10,13,0.10)); border:1px solid rgba(255,255,255,0.03); transform: translateZ(24px) translateY(6px); transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; color:#dbeafc; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; z-index:5; }
+    .glass .label { font-weight:700; color:var(--accent); font-size:0.92rem; letter-spacing:0.02em; }
+    .glass .sub   { font-size:0.78rem; opacity:0.9; }
+
+    .grain { position:absolute; inset:0; z-index:6; pointer-events:none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='t'><feTurbulence baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23t)' opacity='0.06' /></svg>"); mix-blend-mode:overlay; opacity:0.06; transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; transform: translateZ(10px); }
+
+    .photo-card:focus-within .card-wrap,
+    .photo-card:hover .card-wrap { transform: translateY(-6px) scale(1.008); box-shadow: 0 36px 88px rgba(2,6,23,0.78); }
+    .photo-card:focus-within .photo,
+    .photo-card:hover .photo { transform: translate3d(-2px,-2px,6px) scale(1.02); }
+
+    @keyframes enterTogether {
+      0% { opacity:0; transform: translateY(22px) scale(0.985); filter: blur(6px) saturate(.95); }
+      45% { opacity:0.6; transform: translateY(10px) scale(0.992); filter: blur(2px) saturate(1.01); }
+      100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0) saturate(1.02); }
+    }
+
+    @media (max-width:900px){ :root { --card-h: clamp(220px, 30vh, 340px); --card-radius:12px; } }
+    @media (max-width:600px){ :root { --card-h: clamp(180px, 28vh, 260px); --card-radius:12px; } .glass { left:8px; right:8px; bottom:10px; padding:8px 10px; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card-wrap, .photo, .rim, .glass, .grain { animation: none !important; transition: none !important; transform: none !important; }
+      .card-wrap { opacity:1 !important; }
+      .grain { opacity:0.03; }
+    }
+
+    /* -------------------------
+       LIGHTBOX STYLES
+       ------------------------- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      background: rgba(3,6,12,0.92);
+      backdrop-filter: blur(8px) saturate(1.05);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 24px;
+    }
+    .lightbox[aria-hidden="false"] { display:flex; }
+
+    .lb-stage {
+      max-width: min(1100px, 96%);
+      max-height: calc(100vh - 160px);
+      width: 100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .lb-img {
+      max-width: 100%;
+      max-height: calc(100vh - 280px);
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 30px 80px rgba(2,6,23,0.6);
+      transform-origin: center center;
+      transition: transform 320ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+      opacity: 0;
+      z-index: 10000;
+    }
+    .lightbox[aria-hidden="false"] .lb-img { opacity: 1; transform: scale(1); }
+
+    .lb-caption {
+      text-align: center;
+      color: #cdd6f4;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      max-width: 90%;
+      margin: 0 auto;
+      pointer-events: none;
+      z-index: 10001;
+    }
+    .lb-title { color: var(--accent); font-weight:700; font-size: 1.05rem; }
+    .lb-sub { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
+
+    .lb-close, .lb-prev, .lb-next {
+      position: absolute;
+      background: rgba(6,8,12,0.45);
+      border: 1px solid rgba(255,255,255,0.04);
+      color: #cdd6f4;;
+      font-weight:700;
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      z-index: 10002;
+      backdrop-filter: blur(6px);
+    }
+    .lb-close { right: 28px; top: 28px; font-size: 20px; line-height:1; }
+    .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; padding: 12px 14px; }
+    .lb-next { right: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; padding: 12px 14px; }
+
+    @media (max-width:700px){
+      .lb-prev, .lb-next { display:none; }
+      .lb-close { right: 16px; top: 16px; }
+      .lb-img { max-height: calc(100vh - 160px); }
+    }
+
+    .lb-close:focus, .lb-prev:focus, .lb-next:focus { outline: 3px solid rgba(137,180,250,0.18); }
+
+    .lb-img { transform: scale(0.98); }
+    .lightbox[aria-hidden="false"] .lb-img { transform: scale(1); }
+
+    body.lb-open { overflow: hidden; touch-action: none; }
+    
+    /* Ensure all lightbox elements are above everything else */
+    .lightbox * {
+      position: relative;
+      z-index: 10003;
+    }
+  </style>
+
+  <script>
+    (function(){
+      // ---------- tilt + entrance code (unchanged) ----------
+      const cards = Array.from(document.querySelectorAll('.photo-card'));
+      if(!cards.length) return;
+
+      const maxTilt = 8; // degrees
+      const maxOffset = 12; // px
+
+      function apply(card, x, y){
+        const rect = card.getBoundingClientRect();
+        const nx = ((x - rect.left) / rect.width - 0.5) * 2;
+        const ny = ((y - rect.top) / rect.height - 0.5) * 2;
+
+        const rotateY = nx * maxTilt;
+        const rotateX = -ny * maxTilt;
+
+        const wrap = card.querySelector('.card-wrap');
+        const img = card.querySelector('.photo');
+        const rim = card.querySelector('.rim');
+        const glass = card.querySelector('.glass');
+        const grain = card.querySelector('.grain');
+
+        wrap.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+
+        const tx = -nx * maxOffset * 0.5;
+        const ty = -ny * maxOffset * 0.5;
+        img.style.transform = `translate3d(${tx}px, ${ty}px, 6px) scale(1.02)`;
+        rim.style.transform = `translate3d(${tx * 0.6}px, ${ty * 0.6}px, 2px)`;
+        glass.style.transform = `translate3d(${tx * 0.3}px, ${ty * 0.3}px, 24px)`;
+        grain.style.transform = `translate3d(${tx * 0.2}px, ${ty * 0.2}px, 10px)`;
+      }
+
+      function reset(card){
+        const wrap = card.querySelector('.card-wrap');
+        if(wrap) wrap.style.transform = '';
+        ['photo','rim','glass','grain'].forEach(c => {
+          const el = card.querySelector('.' + c);
+          if(el) el.style.transform = '';
+        });
+      }
+
+      cards.forEach(card => {
+        let rect = null, raf = null;
+
+        function onMove(e){
+          if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          const isTouch = e.type.startsWith('touch');
+          const cx = isTouch ? (e.touches && e.touches[0] && e.touches[0].clientX) || 0 : e.clientX;
+          const cy = isTouch ? (e.touches && e.touches[0] && e.touches[0].clientY) || 0 : e.clientY;
+          rect = rect || card.getBoundingClientRect();
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(()=> apply(card, cx, cy));
+        }
+        function onLeave(){ cancelAnimationFrame(raf); reset(card); rect = null; }
+
+        card.addEventListener('mousemove', onMove, { passive:true });
+        card.addEventListener('mouseleave', onLeave);
+        card.addEventListener('touchstart', (e)=>{ rect=card.getBoundingClientRect(); onMove(e); }, { passive:true });
+        card.addEventListener('touchmove', onMove, { passive:true });
+        card.addEventListener('touchend', onLeave, { passive:true });
+
+        card.addEventListener('focusin', ()=> { card.querySelector('.card-wrap').style.transform = 'translateY(-6px) scale(1.008)'; });
+        card.addEventListener('focusout', ()=> reset(card));
+      });
+
+      const imgs = Array.from(document.querySelectorAll('.photo'));
+      let done = 0;
+      imgs.forEach(img=>{
+        if(img.complete) done++;
+        else {
+          img.addEventListener('load', ()=> { done++; if(done === imgs.length) sync(); }, { once:true });
+          img.addEventListener('error', ()=> { done++; if(done === imgs.length) sync(); }, { once:true });
+        }
+      });
+      if(done === imgs.length) sync();
+      function sync(){
+        const wraps = document.querySelectorAll('.card-wrap');
+        wraps.forEach(w => { w.style.animation = 'none'; });
+        void document.body.offsetWidth;
+        wraps.forEach(w => { w.style.animation = ''; w.style.animationDelay = '0ms'; });
+      }
+
+      // ---------- LIGHTBOX INTERACTIONS (hide thumbnail + caption/effects + #back) ----------
+      const lightbox = document.getElementById('photo-lightbox');
+      const lbImg = lightbox.querySelector('.lb-img');
+      const lbTitle = lightbox.querySelector('.lb-title');
+      const lbSub = lightbox.querySelector('.lb-sub');
+      const lbClose = lightbox.querySelector('.lb-close');
+      const lbPrev = lightbox.querySelector('.lb-prev');
+      const lbNext = lightbox.querySelector('.lb-next');
+      const focusableElements = [lbClose, lbPrev, lbNext];
+
+      // Build an array of data from the cards so we can prev/next
+      const gallery = cards.map(card => {
+        const img = card.querySelector('.photo');
+        const title = card.querySelector('.glass .label')?.textContent || '';
+        const sub = card.querySelector('.glass .sub')?.textContent || '';
+        return { src: img.getAttribute('src'), alt: img.getAttribute('alt') || '', title, sub, cardEl: card };
+      });
+
+      let currentIndex = -1;
+      let lastOriginState = null;   // will store array of { el, prevStyles }
+      let prevBackDisplay = null;   // to remember original display of #back
+
+      function saveAndHide(el, opts = {}) {
+        if(!el) return null;
+        const prev = {
+          el,
+          inline: {
+            visibility: el.style.visibility ?? '',
+            opacity: el.style.opacity ?? '',
+            pointerEvents: el.style.pointerEvents ?? '',
+            transition: el.style.transition ?? '',
+            display: el.style.display ?? '',
+            zIndex: el.style.zIndex ?? ''
+          }
+        };
+        // apply hide behaviour: keep layout stable for img => use visibility:hidden
+        if(opts.visibilityHidden) {
+          el.style.visibility = 'hidden';
+          el.style.zIndex = '1'; // Keep it below the lightbox
+        } else {
+          // fade out
+          el.style.transition = (el.style.transition ? el.style.transition + ', ' : '') + 'opacity 180ms ease';
+          el.style.opacity = '0';
+          el.style.zIndex = '1'; // Keep it below the lightbox
+        }
+        // turn off pointer events
+        el.style.pointerEvents = 'none';
+        return prev;
+      }
+
+      function restore(prev) {
+        if(!prev || !prev.el) return;
+        const el = prev.el;
+        const s = prev.inline;
+        el.style.visibility = s.visibility;
+        el.style.opacity = s.opacity;
+        el.style.pointerEvents = s.pointerEvents;
+        el.style.transition = s.transition;
+        el.style.display = s.display;
+        el.style.zIndex = s.zIndex;
+      }
+
+      function openAt(index){
+        if(index < 0 || index >= gallery.length) return;
+
+        // if something was hidden previously, restore it first (keeps state sane when quickly switching)
+        if(Array.isArray(lastOriginState) && lastOriginState.length) {
+          lastOriginState.forEach(restore);
+          lastOriginState = null;
+        }
+
+        currentIndex = index;
+        const item = gallery[index];
+        lbImg.src = item.src;
+        lbImg.alt = item.alt || item.title || '';
+        lbTitle.textContent = item.title;
+        lbSub.textContent = item.sub;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('lb-open');
+        document.body.classList.add('lb-open');
+
+        // hide thumbnail image and other decorative parts but avoid layout shift:
+        const originImg = item.cardEl.querySelector('.photo');
+        const originGlass = item.cardEl.querySelector('.glass');
+        const originRim = item.cardEl.querySelector('.rim');
+        const originGrain = item.cardEl.querySelector('.grain');
+
+        lastOriginState = [];
+        // hide the actual image using visibility so the grid doesn't reflow
+        if(originImg) lastOriginState.push(saveAndHide(originImg, { visibilityHidden: true }));
+        // fade out caption and effects (keep layout)
+        if(originGlass) lastOriginState.push(saveAndHide(originGlass, { visibilityHidden: false }));
+        if(originRim) lastOriginState.push(saveAndHide(originRim, { visibilityHidden: false }));
+        if(originGrain) lastOriginState.push(saveAndHide(originGrain, { visibilityHidden: false }));
+
+        // hide div#back if present, preserving its prior display value
+        try {
+          const backEl = document.getElementById('back');
+          if(backEl) {
+            if(prevBackDisplay === null) prevBackDisplay = backEl.style.display || '';
+            backEl.style.display = 'none';
+          }
+        } catch (e) { /* ignore */ }
+
+        // focus close button
+        lbClose.focus({ preventScroll:true });
+
+        // Set source card to lower z-index to prevent overlapping
+        gallery.forEach(g => g.cardEl.querySelector('.card-wrap').style.zIndex = 1);
+        gallery[index].cardEl.querySelector('.card-wrap').style.zIndex = 1;
+      }
+
+      function closeLightbox(){
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('lb-open');
+        document.body.classList.remove('lb-open');
+
+        // restore hidden thumbnail elements (if any)
+        try {
+          if(Array.isArray(lastOriginState)) {
+            lastOriginState.forEach(restore);
+            lastOriginState = null;
+          }
+        } catch(e){ /* ignore */ }
+
+        // restore #back display if we modified it
+        try {
+          const backEl = document.getElementById('back');
+          if(backEl) {
+            if(prevBackDisplay === null) backEl.style.display = '';
+            else backEl.style.display = prevBackDisplay;
+            prevBackDisplay = null;
+          }
+        } catch(e){ /* ignore */ }
+
+        // restore z-indexes
+        gallery.forEach(g => g.cardEl.querySelector('.card-wrap').style.zIndex = '');
+
+        // return focus to origin thumbnail if possible
+        if(currentIndex >= 0 && gallery[currentIndex] && gallery[currentIndex].cardEl) {
+          gallery[currentIndex].cardEl.focus({ preventScroll: true });
+        }
+        currentIndex = -1;
+      }
+
+      function showPrev(){
+        if(currentIndex <= 0) return;
+        openAt(currentIndex - 1);
+      }
+      function showNext(){
+        if(currentIndex === -1) return;
+        openAt((currentIndex + 1) % gallery.length);
+      }
+
+      // open when clicking a card or pressing Enter/Space when focused
+      cards.forEach((card, i) => {
+        card.addEventListener('click', (e) => {
+          openAt(i);
+        });
+        card.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openAt(i);
+          }
+        });
+      });
+
+      // close / nav buttons
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', showPrev);
+      lbNext.addEventListener('click', showNext);
+
+      // close when clicking backdrop (but not when clicking the stage)
+      lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) closeLightbox();
+      });
+
+      // keyboard handling: Esc close, Left/Right nav
+      window.addEventListener('keydown', (e) => {
+        if(lightbox.getAttribute('aria-hidden') === 'false') {
+          if(e.key === 'Escape') {
+            e.preventDefault();
+            closeLightbox();
+          } else if(e.key === 'ArrowLeft') {
+            e.preventDefault();
+            showPrev();
+          } else if(e.key === 'ArrowRight') {
+            e.preventDefault();
+            showNext();
+          }
+        }
+      });
+
+      // trap focus minimally: keep focus within the visible controls
+      lightbox.addEventListener('keydown', (e) => {
+        if(e.key !== 'Tab') return;
+        const visibleControls = focusableElements.filter(el => el.offsetParent !== null);
+        if(visibleControls.length === 0) return;
+
+        const first = visibleControls[0];
+        const last = visibleControls[visibleControls.length - 1];
+        if(e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if(!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      });
+
+      // touch: swipe left/right to navigate (simple)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const minSwipe = 50;
+      lightbox.addEventListener('touchstart', e => {
+        if(e.touches && e.touches[0]) touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchmove', e => {
+        if(e.touches && e.touches[0]) touchEndX = e.touches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', () => {
+        const dx = touchEndX - touchStartX;
+        if(Math.abs(dx) > minSwipe) {
+          if(dx > 0) showPrev(); else showNext();
+        }
+        touchStartX = touchEndX = 0;
+      });
+
+      // preload neighboring images for smoother nav
+      function preload(src){ const i = new Image(); i.src = src; }
+      lightbox.addEventListener('transitionend', () => {
+        if(currentIndex >= 0) {
+          const prev = gallery[(currentIndex - 1 + gallery.length) % gallery.length];
+          const next = gallery[(currentIndex + 1) % gallery.length];
+          if(prev) preload(prev.src);
+          if(next) preload(next.src);
+        }
+      });
+
+      // ensure images with long load still show; set a small onerror placeholder
+      lbImg.addEventListener('error', () => {
+        lbImg.src = '';
+        lbImg.alt = 'Image failed to load';
+      });
+
+    })();
+  </script>
+</section>
+
+
+
+
+
+
+<footer style="display: flex; justify-content: center; align-items: center; gap: 40px; background-color: #11111b; padding: 15px 0; color: white;">
+    
+    <!-- Instagram -->
+    <div style="text-align: center;">
+        <p style="margin: 0 0 5px 0;">Instagram</p>
+        <a id="insta" href="https://www.instagram.com/mchs_ai_club/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 30px; height: 30px; margin-top: 5px;">
+        </a>
+    </div>
+
+    <!-- GitHub -->
+    <div style="text-align: center;">
+        <p style="margin: 0 0 5px 0;">Website Code</p>
+        <a id="github" href="https://github.com/wileymallgren/mchsaiclub/" target="_blank">
+            <img src="../imgs/githublogo.png" alt="GitHub" style="width: 30px; height: 30px; margin-top: 5px; fill: white;">
+        </a>
+    </div>
+
+</footer>
+
+    <div style="text-align: left; background-color: #11111b; color: #cdd6f4; padding: 0px 0; font-size: 10px;">
+    Website created by Wiley Mallgren
+</div>
+
+    <script src="../header.js"></script>
+</body>
