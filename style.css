@@ -211,14 +211,6 @@ footer p {
         margin: 10px 0;
     }
 
-    .carousel {
-        max-width: 100%;
-    }
-
-    .carousel-button {
-        padding: 10px;
-    }
-
     #join {
         padding: 30px 20px;
     }
@@ -228,3 +220,311 @@ footer p {
         box-sizing: border-box;
     }
 }
+
+    :root{
+      --accent: #89b4fa;
+      --card-radius-project: 14px;
+      --shadow-project: 0 22px 50px rgba(2,6,23,0.7);
+      --card-h-project: clamp(260px, 32vh, 420px); /* unify height if you want */
+    }
+
+    /* Ensure the photo-card doesn't break your layout */
+    .photo-card { margin: 0; outline: none; width: 100%; max-width: 520px; }
+    .photo-card .card-wrap {
+      position: relative;
+      border-radius: var(--card-radius-project);
+      overflow: visible;
+      box-shadow: var(--shadow-project);
+      border: 1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      transition: transform 420ms cubic-bezier(.2,.9,.3,1), box-shadow 320ms ease;
+      /* entrance state */
+      opacity: 0;
+      transform: translateY(22px) scale(0.985);
+      animation: enterTogether 900ms cubic-bezier(.2,.9,.3,1) both;
+      height: var(--card-h-project);
+      width: 100%;
+    }
+
+    .photo-card[data-aspect="landscape"] .card-wrap { /* optional constraint if you prefer fixed aspect */ }
+
+    .photo-card .photo {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; border-radius: var(--card-radius-project);
+      -webkit-user-drag: none; user-select: none;
+      transform: translateZ(0);
+      transition: transform 420ms cubic-bezier(.2,.9,.3,1), filter 420ms ease;
+      z-index: 1;
+      filter: saturate(1.02) contrast(1.02);
+    }
+
+    .photo-card .rim {
+      position: absolute; inset: -6px; z-index: 0; border-radius: calc(var(--card-radius-project) + 6px);
+      background: conic-gradient(from 110deg at 50% 50%, rgba(137,180,250,0.16), rgba(137,180,250,0.06) 40%, rgba(120,90,200,0.05) 70%, transparent 100%);
+      filter: blur(16px) saturate(1.05); mix-blend-mode: screen; opacity: 0.95;
+      pointer-events: none; transition: transform 420ms cubic-bezier(.2,.9,.3,1);
+    }
+
+    .photo-card .glass {
+      position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 4;
+      border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px;
+      backdrop-filter: blur(6px) saturate(1.05);
+      background: linear-gradient(180deg, rgba(11,12,16,0.16), rgba(9,10,13,0.10));
+      border: 1px solid rgba(255,255,255,0.03);
+      transform: translateZ(24px) translateY(6px);
+      transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 320ms ease;
+      color: #dbeafc;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      z-index: 5;
+    }
+    .photo-card .glass .label { font-weight: 700; color: var(--accent); font-size: 0.92rem; }
+    .photo-card .glass .sub { font-size: 0.78rem; opacity: 0.9; }
+
+    .photo-card .grain {
+      position: absolute; inset: 0; z-index: 6; pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='t'><feTurbulence baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23t)' opacity='0.06' /></svg>");
+      mix-blend-mode: overlay; opacity: 0.06; transition: transform 420ms cubic-bezier(.2,.9,.3,1);
+      transform: translateZ(10px);
+    }
+
+    /* hover/focus */
+    .photo-card:focus-within .card-wrap,
+    .photo-card:hover .card-wrap {
+      transform: translateY(-6px) scale(1.008);
+      box-shadow: 0 36px 88px rgba(2,6,23,0.78);
+    }
+    .photo-card:focus-within .photo,
+    .photo-card:hover .photo { transform: translate3d(-2px,-2px,6px) scale(1.02); }
+
+    /* entrance keyframe */
+    @keyframes enterTogether {
+      0% { opacity: 0; transform: translateY(22px) scale(0.985); filter: blur(6px) saturate(.95); }
+      45% { opacity: 0.6; transform: translateY(10px) scale(0.992); filter: blur(2px) saturate(1.01); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0) saturate(1.02); }
+    }
+
+    @media (max-width: 900px) {
+      :root { --card-h-project: clamp(220px, 30vh, 340px); }
+      .photo-card { max-width: 480px; }
+    }
+    @media (max-width: 600px) {
+      :root { --card-h-project: clamp(180px, 28vh, 260px); }
+      .photo-card { max-width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .photo-card .card-wrap, .photo-card .photo, .photo-card .rim, .photo-card .glass, .photo-card .grain {
+        animation: none !important; transition: none !important; transform: none !important;
+      }
+      .photo-card .card-wrap { opacity: 1 !important; }
+      .photo-card .grain { opacity: 0.03; }
+    }
+
+
+
+        :root {
+      --card-w: 240px;
+      --card-h: 340px;
+      --card-radius: 14px;
+    }
+
+    /* Responsive sizes */
+    @media (max-width: 900px) {
+      :root { --card-w: 200px; --card-h: 300px; }
+    }
+    @media (max-width: 600px) {
+      :root { --card-w: 160px; --card-h: 240px; }
+    }
+
+    /* ---------- Flip card wrapper (also used for entrance animation) ---------- */
+    .flip-card-wrapper {
+      width: var(--card-w);
+      height: var(--card-h);
+      flex-shrink: 0;
+      perspective: 1000px;       /* 3D perspective for the inner flip */
+      overflow: visible;         /* CRITICAL: allow the flipping face to show outside */
+      --final-offset: 0px;       /* will be overridden per-child */
+      transform: translateY(calc(var(--final-offset) + 40px));
+      opacity: 0;
+      transition: transform 1.4s cubic-bezier(.2,.9,.3,1), opacity 1.4s ease;
+      border-radius: var(--card-radius);
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      touch-action: auto; /* allow scrolling and swiping; tap detection uses movement threshold */
+    }
+
+    /* make hovered / active wrapper stack above neighbors when flipping */
+    .flip-card-wrapper:hover,
+    .flip-card-wrapper.flipped,
+    .flip-card-wrapper:focus-within {
+      z-index: 5;
+    }
+
+    /* when the observer marks it visible, slide to final offset */
+    .flip-card-wrapper.visible {
+      opacity: 1;
+      transform: translateY(var(--final-offset));
+    }
+
+    /* per-image final offsets and staggered entrance delays (desktop) */
+    .gallery-row .flip-card-wrapper:nth-child(1) { --final-offset: 0px;  transition-delay: 0.18s; }
+    .gallery-row .flip-card-wrapper:nth-child(2) { --final-offset: 36px; transition-delay: 0.42s; }
+    .gallery-row .flip-card-wrapper:nth-child(3) { --final-offset: 18px;  transition-delay: 0.68s; }
+    .gallery-row .flip-card-wrapper:nth-child(4) { --final-offset: 48px;  transition-delay: 0.92s; }
+
+    /* ---------- The flipping inner card ---------- */
+    .flip-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;     /* keep front and back in 3D */
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(.2,.9,.3,1);
+      -webkit-transition: -webkit-transform 0.8s cubic-bezier(.2,.9,.3,1);
+      border-radius: var(--card-radius);
+      will-change: transform;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* flip on hover for pointer devices */
+    .flip-card-wrapper:hover .flip-card-inner {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    /* also allow a .flipped class (used for touch devices) */
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    /* ---------- front (image) ---------- */
+    .card-front {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--card-radius);
+      -webkit-user-drag: none;
+      user-select: none;
+      backface-visibility: hidden;   /* hide when rotated away */
+      -webkit-backface-visibility: hidden;
+      position: absolute;
+      top: 0; left: 0;
+    }
+
+    /* ---------- back (caption) ---------- */
+    .flip-card-back {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      background: linear-gradient(180deg, #3b3f56 0%, #272936 100%);
+      color: #fff;
+      font-size: 1.05rem;
+      text-align: center;
+      border-radius: var(--card-radius);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: rotateY(180deg);   /* start flipped so it shows on rotation */
+      -webkit-transform: rotateY(180deg);
+      will-change: transform, opacity;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      cursor: pointer; /* indicate it's clickable */
+    }
+
+    /* slight improvement: subtle 3D depth while hovering */
+    .flip-card-wrapper:hover .flip-card-inner,
+    .flip-card-inner.flipped {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      transform-origin: center;
+      -webkit-transform-origin: center;
+    }
+
+    /* optional: improve perceived 3D by nudging the back when hovered */
+    .flip-card-wrapper:hover .flip-card-back,
+    .flip-card-inner.flipped .flip-card-back {
+      transform: rotateY(180deg) translateZ(0.1px);
+      -webkit-transform: rotateY(180deg) translateZ(0.1px);
+    }
+
+    /* small accessibility: focus also flips (keyboard) */
+    .flip-card-wrapper:focus-within .flip-card-inner {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    /* tap hint (only visible on touch devices) */
+    .tap-hint {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+    @media (hover: none) {
+      .tap-hint { opacity: 1; transform: translateY(0); }
+    }
+
+    /* keep gallery-row padding and ensure vertical overflow remains visible */
+    .gallery-row { padding-bottom: 2.4rem; }
+
+    /* ---------------- Mobile / narrow layout: show all cards (no side-to-side scroll) ---------------- */
+    @media (max-width: 900px) {
+      .gallery-row {
+        flex-wrap: wrap !important;       /* allow multiple rows */
+        overflow-x: visible !important;   /* no horizontal scrolling */
+        height: auto !important;          /* let the gallery expand vertically */
+        justify-content: center;
+        gap: 18px;
+      }
+      .flip-card-wrapper {
+        margin-bottom: 18px;
+        /* simplify stagger on mobile so all appear promptly */
+        transition-delay: 0s !important;
+        --final-offset: 12px;
+      }
+      /* remove large stagger-specific offsets for stacked layout */
+      .gallery-row .flip-card-wrapper:nth-child(1),
+      .gallery-row .flip-card-wrapper:nth-child(2),
+      .gallery-row .flip-card-wrapper:nth-child(3),
+      .gallery-row .flip-card-wrapper:nth-child(4) {
+        transition-delay: 0s;
+      }
+    }
+
+
+
+
+      /* Timeline fade-in + slide animation */
+  .timeline-item .timeline-content {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(.2,.9,.3,1);
+  }
+
+  .timeline-item.visible .timeline-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .timeline-item {
+      justify-content: center !important;
+    }
+    .timeline-item .timeline-content {
+      width: 80% !important;
+    }
+  }
