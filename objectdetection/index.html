@@ -4,306 +4,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCHS AI Club</title>
-    <link rel="icon" href="../imgs/logo-removebg-preview.png" type="image/png">
-    <link rel="stylesheet" href="../style.css?v=2.1">
+    <title>Object Detection | MCHS AI Club</title>
+    <meta name="description" content="A custom YOLOv8 object detection model trained in PyTorch by the MCHS AI Club at Maria Carrillo High School.">
+    <link rel="canonical" href="https://www.mchsaiclub.org/objectdetection/">
+    <meta name="theme-color" content="#11111b">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="MCHS AI Club">
+    <meta property="og:title" content="Object Detection | MCHS AI Club">
+    <meta property="og:description" content="A custom YOLOv8 model trained in PyTorch to detect objects in real time.">
+    <meta property="og:url" content="https://www.mchsaiclub.org/objectdetection/">
+    <meta property="og:image" content="https://www.mchsaiclub.org/imgs/share-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../imgs/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../imgs/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css?v=2.2">
 </head>
 
 <body>
     <header>
-        <div id="logo-container" style="text-align: center; margin-bottom: 0px;">
-            <img src="../imgs/logo-removebg-preview.png" alt="Logo" id="logo">
+        <div id="logo-container">
+            <img src="../imgs/logo-150.webp" srcset="../imgs/logo-150.webp 1x, ../imgs/logo-300.webp 2x" width="150" height="150" alt="MCHS AI Club logo" id="logo">
         </div>
         <div id="header-content">
-            <h1 id="clubName" style="color: #89b4fa">Object Detection</h1>
+            <h1 id="clubName">Object Detection</h1>
         </div>
     </header>
 
-
-
-
-
-<div id="back" style="position:sticky;top:0;z-index:9999;display:flex;justify-content:flex-start;">
-  <button onclick="location.href='../'" 
-    style="margin:8px;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:0px solid rgba(137,180,250,0.35);border-radius:999px;background:#11111b;color:#cdd6f4;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,0.25);cursor:pointer;font:600 14px/1.1 system-ui, -apple-system,Segoe UI,Roboto,Arial,sans-serif;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-      <path d="M15 18l-6-6 6-6"></path>
-      <path d="M21 12H9"></path>
-    </svg>
-    Back
-  </button>
-</div>
-
-
-
-
-
-    <section>
-    <div style="max-width: 800px; margin: 0 auto; background: #313244; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #89b4fa;">What is it?</h2>
-        <p style="color: #cdd6f4; padding-bottom: 1rem;">
-            We trained a custom <strong style="color:#89b4fa;">YOLOv8</strong> model in <strong style="color:#89b4fa;">PyTorch</strong> using publicly available datasets to detect objects in real time.
-        </p>
-        <p style="color: #cdd6f4; padding-bottom: 1rem;">
-            <strong style="color:#89b4fa;">YOLO</strong> (You Only Look Once) was the obvious choice since it is very fast and able to run in real time on non-specialized hardware.
-        </p>
-        <p style="color: #cdd6f4; padding-bottom: 1rem;">
-            The project, lead by <strong style="color:#89b4fa;">Wiley Mallgren</strong>, took about 3 months to complete, and is still being improved. We are currently working on applying to 
-            detection of different types of trash based on their recyclability! We always aspire to make the world a better place.
-        </p>
-    </div>
-    </section>
-
-
-<section id="showcase-photos" aria-labelledby="showcase-title" style="padding:2rem 1.25rem; color: #cdd6f4;; margin-bottom: 3rem; position: relative; z-index: 1;">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div style="max-width: 1000px; margin: 0 auto;  margin-bottom: 3rem; background: #313244; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-      <h2 id="showcase-title" style="font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial; font-weight:700; font-size:clamp(1.25rem,2.2vw,1.9rem); margin-bottom: 2rem; color:#89b4fa;">
-        North Bay Science and Discovery Day
-      </h2>
-      <p style="margin:0 0 1.25rem; color: #cdd6f4;">
-        The <strong style="color:#89b4fa;">North Bay Science and Discovery Day</strong> is an annual event that brings together science enthusiasts, researchers, educators, and the general public to celebrate and explore various scientific fields. 
-      </p>
-      <p style="margin:0 0 1.25rem; color: #cdd6f4;"></p>
-        At our booth, we demonstrated our object detection model in action, showcasing its capabilities and potential applications.
-        We also encouraged attendees to question the output of the model. When it made mistakes, we used it as a <strong style="color:#89b4fa;">learning opportunity</strong> to explain why not to blindly trust AI.
-      </p>
-    </div>
-
-    <div class="photo-grid" role="list" style="display:grid; grid-template-columns:repeat(2,1fr); gap:26px;">
-      <!-- Landscape 4:3 -->
-      <figure class="photo-card" data-aspect="landscape" role="listitem" tabindex="0">
-        <div class="card-wrap">
-          <img class="photo" src="imgs/guransh.jpg" alt="Guransh" loading="lazy">
-          <div class="rim" aria-hidden="true"></div>
-          <div class="glass">
-            <div class="label">Guransh at our booth</div>
-            <div class="sub">North Bay Science and Discover Day</div>
-          </div>
-          <div class="grain" aria-hidden="true"></div>
-        </div>
-      </figure>
-
-      <!-- Portrait 3:4 -->
-      <figure class="photo-card" data-aspect="portrait" role="listitem" tabindex="0">
-        <div class="card-wrap">
-          <img class="photo" src="imgs/ai.jpg" alt="Project" loading="lazy">
-          <div class="rim" aria-hidden="true"></div>
-          <div class="glass">
-            <div class="label">The model in Action</div>
-            <div class="sub">North Bay Science and Discover Day</div>
-          </div>
-          <div class="grain" aria-hidden="true"></div>
-        </div>
-      </figure>
-    </div>
-  </div>
-
-  <!-- LIGHTBOX MARKUP -->
-  <div id="photo-lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lb-title" tabindex="-1">
-    <button class="lb-close" aria-label="Close (Esc)">&times;</button>
-    <button class="lb-prev" aria-label="Previous (Left)">&lsaquo;</button>
-    <div class="lb-stage" role="document">
-      <img class="lb-img" src="" alt="">
-      <div class="lb-caption">
-        <div id="lb-title" class="lb-title"></div>
-        <div class="lb-sub"></div>
-      </div>
-    </div>
-    <button class="lb-next" aria-label="Next (Right)">&rsaquo;</button>
-  </div>
-
-  <style>
-    :root{
-      --accent: #89b4fa;
-      --card-radius: 14px;
-      --bg: #0b0b10;
-      --muted: rgba(255,255,255,0.04);
-      --shadow: 0 22px 50px rgba(2,6,23,0.7);
-      --card-h: clamp(260px, 32vh, 420px);
-    }
-
-    .photo-grid { margin-top: 8px; }
-    @media (max-width:900px){ .photo-grid { grid-template-columns: 1fr; gap:18px; } }
-
-    .photo-card { margin:0; outline:none; cursor: pointer; }
-    .card-wrap {
-      position:relative;
-      border-radius:var(--card-radius);
-      overflow:visible;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,0.03);
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      transition: transform 420ms cubic-bezier(.2,.9,.3,1), box-shadow 320ms ease;
-      opacity:0;
-      transform: translateY(22px) scale(0.985);
-      animation: enterTogether 900ms cubic-bezier(.2,.9,.3,1) both;
-      height: var(--card-h);
-      width: 100%;
-    }
-
-    .photo {
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; display:block; border-radius:var(--card-radius);
-      -webkit-user-drag:none; user-select:none;
-      transform:translateZ(0);
-      transition: transform 420ms cubic-bezier(.2,.9,.3,1), filter 420ms ease;
-      z-index:1;
-      filter: saturate(1.02) contrast(1.02);
-    }
-
-    .rim { position:absolute; inset:-6px; z-index:0; border-radius:calc(var(--card-radius) + 6px); background: conic-gradient(from 110deg at 50% 50%, rgba(137,180,250,0.16), rgba(137,180,250,0.06) 40%, rgba(120,90,200,0.05) 70%, transparent 100%); filter: blur(16px) saturate(1.05); mix-blend-mode:screen; opacity:0.95; pointer-events:none; transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; }
-
-    .glass { position:absolute; left:12px; right:12px; bottom:12px; z-index:4; border-radius:10px; padding:10px 12px; display:flex; flex-direction:column; gap:3px; backdrop-filter: blur(6px) saturate(1.05); background: linear-gradient(180deg, rgba(11,12,16,0.16), rgba(9,10,13,0.10)); border:1px solid rgba(255,255,255,0.03); transform: translateZ(24px) translateY(6px); transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; color:#dbeafc; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; z-index:5; }
-    .glass .label { font-weight:700; color:var(--accent); font-size:0.92rem; letter-spacing:0.02em; }
-    .glass .sub   { font-size:0.78rem; opacity:0.9; }
-
-    .grain { position:absolute; inset:0; z-index:6; pointer-events:none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='t'><feTurbulence baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23t)' opacity='0.06' /></svg>"); mix-blend-mode:overlay; opacity:0.06; transition: transform 420ms cubic-bezier(.2,.9,.3,1), opacity 240ms ease; transform: translateZ(10px); }
-
-    .photo-card:focus-within .card-wrap,
-    .photo-card:hover .card-wrap { transform: translateY(-6px) scale(1.008); box-shadow: 0 36px 88px rgba(2,6,23,0.78); }
-    .photo-card:focus-within .photo,
-    .photo-card:hover .photo { transform: translate3d(-2px,-2px,6px) scale(1.02); }
-
-    @keyframes enterTogether {
-      0% { opacity:0; transform: translateY(22px) scale(0.985); filter: blur(6px) saturate(.95); }
-      45% { opacity:0.6; transform: translateY(10px) scale(0.992); filter: blur(2px) saturate(1.01); }
-      100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0) saturate(1.02); }
-    }
-
-    @media (max-width:900px){ :root { --card-h: clamp(220px, 30vh, 340px); --card-radius:12px; } }
-    @media (max-width:600px){ :root { --card-h: clamp(180px, 28vh, 260px); --card-radius:12px; } .glass { left:8px; right:8px; bottom:10px; padding:8px 10px; } }
-
-    @media (prefers-reduced-motion: reduce) {
-      .card-wrap, .photo, .rim, .glass, .grain { animation: none !important; transition: none !important; transform: none !important; }
-      .card-wrap { opacity:1 !important; }
-      .grain { opacity:0.03; }
-    }
-
-    /* -------------------------
-       LIGHTBOX STYLES
-       ------------------------- */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      background: rgba(3,6,12,0.92);
-      backdrop-filter: blur(8px) saturate(1.05);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 24px;
-    }
-    .lightbox[aria-hidden="false"] { display:flex; }
-
-    .lb-stage {
-      max-width: min(1100px, 96%);
-      max-height: calc(100vh - 160px);
-      width: 100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-      position: relative;
-      pointer-events: auto;
-    }
-
-    .lb-img {
-      max-width: 100%;
-      max-height: calc(100vh - 280px);
-      border-radius: 12px;
-      object-fit: contain;
-      box-shadow: 0 30px 80px rgba(2,6,23,0.6);
-      transform-origin: center center;
-      transition: transform 320ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
-      opacity: 0;
-      z-index: 10000;
-    }
-    .lightbox[aria-hidden="false"] .lb-img { opacity: 1; transform: scale(1); }
-
-    .lb-caption {
-      text-align: center;
-      color: #cdd6f4;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-      max-width: 90%;
-      margin: 0 auto;
-      pointer-events: none;
-      z-index: 10001;
-    }
-    .lb-title { color: var(--accent); font-weight:700; font-size: 1.05rem; }
-    .lb-sub { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
-
-    .lb-close, .lb-prev, .lb-next {
-      position: absolute;
-      background: rgba(6,8,12,0.45);
-      border: 1px solid rgba(255,255,255,0.04);
-      color: #cdd6f4;;
-      font-weight:700;
-      border-radius: 10px;
-      padding: 10px 12px;
-      cursor: pointer;
-      z-index: 10002;
-      backdrop-filter: blur(6px);
-    }
-    .lb-close { right: 28px; top: 28px; font-size: 20px; line-height:1; }
-    .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; padding: 12px 14px; }
-    .lb-next { right: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; padding: 12px 14px; }
-
-    @media (max-width:700px){
-      .lb-prev, .lb-next { display:none; }
-      .lb-close { right: 16px; top: 16px; }
-      .lb-img { max-height: calc(100vh - 160px); }
-    }
-
-    .lb-close:focus, .lb-prev:focus, .lb-next:focus { outline: 3px solid rgba(137,180,250,0.18); }
-
-    .lb-img { transform: scale(0.98); }
-    .lightbox[aria-hidden="false"] .lb-img { transform: scale(1); }
-
-    body.lb-open { overflow: hidden; touch-action: none; }
-    
-    /* Ensure all lightbox elements are above everything else */
-    .lightbox * {
-      position: relative;
-      z-index: 10003;
-    }
-  </style>
-
-  <script src="imageEffects.js"></script>
-</section>
-
-
-
-
-
-
-<footer style="display: flex; justify-content: center; align-items: center; gap: 40px; background-color: #11111b; padding: 15px 0; color: #cdd6f4;">
-    
-    <!-- Instagram -->
-    <div style="text-align: center;">
-        <p style="margin: 0 0 5px 0;">Instagram</p>
-        <a id="insta" href="https://www.instagram.com/mchs_ai_club/" target="_blank">
-            <img src="../imgs/3030instalogo.png" alt="Instagram" style="width: 30px; height: 30px; margin-top: 5px;">
+    <div id="back">
+        <a class="back-button" href="../">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            Back
         </a>
     </div>
 
-    <!-- GitHub -->
-    <div style="text-align: center;">
-        <p style="margin: 0 0 5px 0;">Website Code</p>
-        <a id="github" href="https://github.com/wileymallgren/mchsaiclub/" target="_blank">
-            <img src="../imgs/githublogo.png" alt="GitHub" style="width: 30px; height: 30px; margin-top: 5px; fill: white;">
-        </a>
-    </div>
+    <main>
+        <section>
+            <div class="panel panel-800 project-copy">
+                <h2>What is it?</h2>
+                <p>We trained a custom <strong>YOLOv8</strong> model in <strong>PyTorch</strong> using publicly available datasets to detect objects in real time.</p>
+                <p><strong>YOLO</strong> (You Only Look Once) was the obvious choice since it is very fast and able to run in real time on non-specialized hardware.</p>
+                <p>The project, led by <strong>Wiley Mallgren</strong>, took about 3 months to complete, and is still being improved. We are currently working on applying it to
+                    detection of different types of trash based on their recyclability! We always aspire to make the world a better place.</p>
+            </div>
+        </section>
 
-</footer>
+        <section id="showcase-photos" aria-labelledby="showcase-title">
+            <div class="panel panel-1000 project-copy">
+                <h2 id="showcase-title">North Bay Science Discovery Day</h2>
+                <p>The <strong>North Bay Science Discovery Day</strong> is an annual event that brings together science enthusiasts, researchers, educators, and the general public to celebrate and explore various scientific fields.</p>
+                <p>At our booth, we demonstrated our object detection model in action, showcasing its capabilities and potential applications.
+                    We also encouraged attendees to question the output of the model. When it made mistakes, we used it as a <strong>learning opportunity</strong> to explain why not to blindly trust AI.</p>
+            </div>
 
-    <div style="text-align: left; background-color: #11111b; color: #cdd6f4; padding: 0px 0; font-size: 10px;">
-    Website created by Wiley Mallgren
-</div>
+            <div class="photo-grid" role="list">
+                <figure class="photo-card" data-aspect="landscape" role="listitem" tabindex="0">
+                    <div class="card-wrap">
+                        <img class="photo" src="../imgs/booth-1024.webp"
+                            srcset="../imgs/booth-640.webp 640w, ../imgs/booth-1024.webp 1024w"
+                            sizes="(max-width: 600px) calc(100vw - 2rem), 520px"
+                            data-full="../imgs/booth-1600.webp"
+                            width="1024" height="768" loading="lazy" decoding="async"
+                            alt="Guransh Singh seated at the club's booth behind a table of disassembled computer parts, with the club's banner and a large monitor in the background.">
+                        <div class="rim" aria-hidden="true"></div>
+                        <div class="glass">
+                            <div class="label">Guransh at our booth</div>
+                            <div class="sub">North Bay Science Discovery Day</div>
+                        </div>
+                        <div class="grain" aria-hidden="true"></div>
+                    </div>
+                </figure>
 
-    <script src="../header.js"></script>
+                <figure class="photo-card" data-aspect="portrait" role="listitem" tabindex="0">
+                    <div class="card-wrap">
+                        <img class="photo" src="../imgs/model-output-960.webp"
+                            srcset="../imgs/model-output-480.webp 480w, ../imgs/model-output-960.webp 960w"
+                            sizes="(max-width: 600px) calc(100vw - 2rem), 520px"
+                            data-full="../imgs/model-output-1600.webp"
+                            width="960" height="1280" loading="lazy" decoding="async"
+                            alt="A monitor showing the model's live video feed, with detection boxes drawn around two people and a label reading person 95%.">
+                        <div class="rim" aria-hidden="true"></div>
+                        <div class="glass">
+                            <div class="label">The model in Action</div>
+                            <div class="sub">North Bay Science Discovery Day</div>
+                        </div>
+                        <div class="grain" aria-hidden="true"></div>
+                    </div>
+                </figure>
+            </div>
+
+            <div id="photo-lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lb-title" tabindex="-1">
+                <button class="lb-close" aria-label="Close (Esc)">&times;</button>
+                <button class="lb-prev" aria-label="Previous (Left)">&lsaquo;</button>
+                <div class="lb-stage">
+                    <img class="lb-img" alt="">
+                    <div class="lb-caption">
+                        <div id="lb-title" class="lb-title"></div>
+                        <div class="lb-sub"></div>
+                    </div>
+                </div>
+                <button class="lb-next" aria-label="Next (Right)">&rsaquo;</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <p>Instagram</p>
+            <a id="insta" href="https://www.instagram.com/mchs_ai_club/" target="_blank" rel="noopener">
+                <img src="../imgs/3030instalogo.png" width="30" height="30" loading="lazy" alt="Instagram">
+            </a>
+        </div>
+        <div>
+            <p>Website Code</p>
+            <a id="github" href="https://github.com/wileymallgren/mchsaiclub/" target="_blank" rel="noopener">
+                <img src="../imgs/githublogo.png" width="30" height="30" loading="lazy" alt="GitHub">
+            </a>
+        </div>
+    </footer>
+    <div class="credit">Website created by Wiley Mallgren</div>
+
+    <script src="../header.js?v=2.2"></script>
+    <script src="imageEffects.js?v=2.2"></script>
 </body>
+
+</html>

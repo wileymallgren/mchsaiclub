@@ -22,9 +22,9 @@
         const tx = -nx * maxOffset * 0.5;
         const ty = -ny * maxOffset * 0.5;
         img.style.transform = `translate3d(${tx}px, ${ty}px, 6px) scale(1.02)`;
-        rim.style.transform = `translate3d(${tx * 0.6}px, ${ty * 0.6}px, 2px)`;
-        glass.style.transform = `translate3d(${tx * 0.3}px, ${ty * 0.3}px, 24px)`;
-        grain.style.transform = `translate3d(${tx * 0.2}px, ${ty * 0.2}px, 10px)`;
+        if (rim) rim.style.transform = `translate3d(${tx * 0.6}px, ${ty * 0.6}px, 2px)`;
+        if (glass) glass.style.transform = `translate3d(${tx * 0.3}px, ${ty * 0.3}px, 24px)`;
+        if (grain) grain.style.transform = `translate3d(${tx * 0.2}px, ${ty * 0.2}px, 10px)`;
     }
 
     function onMove(e) {
@@ -46,15 +46,6 @@
         passive: true
     });
     card.addEventListener('mouseleave', reset);
-    card.addEventListener('touchstart', (e) => onMove(e), {
-        passive: true
-    });
-    card.addEventListener('touchmove', onMove, {
-        passive: true
-    });
-    card.addEventListener('touchend', reset, {
-        passive: true
-    });
 
     // sync entrance when image loads
     const image = card.querySelector('.photo');

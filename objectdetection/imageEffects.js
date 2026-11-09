@@ -63,18 +63,6 @@
             passive: true
         });
         card.addEventListener('mouseleave', onLeave);
-        card.addEventListener('touchstart', (e) => {
-            rect = card.getBoundingClientRect();
-            onMove(e);
-        }, {
-            passive: true
-        });
-        card.addEventListener('touchmove', onMove, {
-            passive: true
-        });
-        card.addEventListener('touchend', onLeave, {
-            passive: true
-        });
 
         card.addEventListener('focusin', () => {
             card.querySelector('.card-wrap').style.transform = 'translateY(-6px) scale(1.008)';
@@ -131,7 +119,7 @@
         const title = card.querySelector('.glass .label')?.textContent || '';
         const sub = card.querySelector('.glass .sub')?.textContent || '';
         return {
-            src: img.getAttribute('src'),
+            src: img.dataset.full || img.getAttribute('src'),
             alt: img.getAttribute('alt') || '',
             title,
             sub,
@@ -198,6 +186,8 @@
         lbImg.alt = item.alt || item.title || '';
         lbTitle.textContent = item.title;
         lbSub.textContent = item.sub;
+        preload(gallery[(index + 1) % gallery.length].src);
+        preload(gallery[(index - 1 + gallery.length) % gallery.length].src);
         lightbox.setAttribute('aria-hidden', 'false');
         document.documentElement.classList.add('lb-open');
         document.body.classList.add('lb-open');
@@ -282,8 +272,8 @@
     }
 
     function showPrev() {
-        if (currentIndex <= 0) return;
-        openAt(currentIndex - 1);
+        if (currentIndex === -1) return;
+        openAt((currentIndex - 1 + gallery.length) % gallery.length);
     }
 
     function showNext() {
@@ -375,18 +365,9 @@
         const i = new Image();
         i.src = src;
     }
-    lightbox.addEventListener('transitionend', () => {
-        if (currentIndex >= 0) {
-            const prev = gallery[(currentIndex - 1 + gallery.length) % gallery.length];
-            const next = gallery[(currentIndex + 1) % gallery.length];
-            if (prev) preload(prev.src);
-            if (next) preload(next.src);
-        }
-    });
 
-    // ensure images with long load still show; set a small onerror placeholder
     lbImg.addEventListener('error', () => {
-        lbImg.src = '';
+        lbImg.removeAttribute('src');
         lbImg.alt = 'Image failed to load';
     });
 

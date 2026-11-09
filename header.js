@@ -40,6 +40,8 @@ window.onload = function () {
         }
     }
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     if (text === 'Object Detection') {
         setInterval(changeColors, 100);
     } else {
